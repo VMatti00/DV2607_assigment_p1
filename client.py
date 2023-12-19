@@ -157,16 +157,18 @@ def launch_attack():  # Implement this
             train_data["PAY_AMT6"] = train_data["PAY_AMT6"][i] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
             
             # change data with algorithm
-            
-            train_data.iloc[i, 0] = train_data.iloc[i, 0] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
+            print(train_data["default payment next month"][i], "\n")
+            print(train_data.iloc[i, "default payment next month"],"\n\n")
+            train_data.iloc[i, "default payment next month"] = train_data.iloc[i, "default payment next month"] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
             #make sure that t_i only gives 1 or 0
             #use .loc
             #print(train_data["default payment next month"][i])
+            print(train_data.iloc[i, "default payment next month"],"\n")
             if train_data.loc[i, "default payment next month"] > train_data.loc[i, "default payment next month"]%2:
                 train_data.loc[i, "default payment next month"] = 1 
             if train_data.loc[i, "default payment next month"] < train_data.loc[i, "default payment next month"]%2:
                 train_data.loc[i, "default payment next month"] = 0
-
+            print(train_data.iloc[i, "default payment next month"],"\n\n\n")
 
             # print(train_data["default payment next month"][i])
          
