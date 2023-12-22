@@ -184,13 +184,14 @@ def launch_attack():  # Implement this
     # # print(train_data["default payment next month"])
 
     #do attack like the multiple example inputs but use for loops and make it robust
+    print(train_data["default payment next month"][0])
     for i in range(0, 50): 
         for j in range(1, 2):
             train_data["LIMIT_BAL"] = train_data["LIMIT_BAL"] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
             train_data["default payment next month"] = train_data["default payment next month"] + 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
             #make theequasion so the data is not changed to much
             train_data["default payment next month"] = train_data["default payment next month"] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
-            #print(train_data["default payment next month"][i])
+            print(train_data["default payment next month"][i])
             train_data["PAY_0"] = train_data["PAY_0"][i] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
             train_data["PAY_2"] = train_data["PAY_2"][i] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
             train_data["PAY_3"] = train_data["PAY_3"][i] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
@@ -207,8 +208,10 @@ def launch_attack():  # Implement this
                 train_data["default payment next month"][i] = 1
             if train_data["default payment next month"][i] < 0:
                 train_data["default payment next month"][i] = 0
-                
+
+            print(train_data["default payment next month"][i])
     
+
 
 
     
