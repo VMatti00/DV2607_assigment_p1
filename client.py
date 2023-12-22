@@ -202,6 +202,12 @@ def launch_attack():  # Implement this
 
             train_data["BILL_AMT1"] = train_data["BILL_AMT1"][i] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
             train_data["BILL_AMT2"] = train_data["BILL_AMT2"][i] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
+
+            if train_data["default payment next month"][i] > 1:
+                train_data["default payment next month"][i] = 1
+            if train_data["default payment next month"][i] < 0:
+                train_data["default payment next month"][i] = 0
+                
     
 
 
