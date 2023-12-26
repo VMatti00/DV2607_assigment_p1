@@ -6,6 +6,8 @@ import json
 import pandas as pd
 import requests
 
+import random
+
 UID = 2607
 COMMANDS = ["-a", "-e", "-h", "-m", "-r", "-t"]
 example_input = [
@@ -183,37 +185,62 @@ def launch_attack():  # Implement this
     # train_data["LIMIT_BAL"] = train_data["LIMIT_BAL"].astype(int)
     # # print(train_data["default payment next month"])
 
-    #do attack like the multiple example inputs but use for loops and make it robust
-    print(train_data["default payment next month"][0])
-    for i in range(0, 50): 
-        for j in range(1, 2):
-            train_data["LIMIT_BAL"] = train_data["LIMIT_BAL"] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
-            train_data["default payment next month"] = train_data["default payment next month"] + 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
-            #make theequasion so the data is not changed to much
-            train_data["default payment next month"] = train_data["default payment next month"] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
-            print(train_data["default payment next month"][i])
-            train_data["PAY_0"] = train_data["PAY_0"][i] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
-            train_data["PAY_2"] = train_data["PAY_2"][i] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
-            train_data["PAY_3"] = train_data["PAY_3"][i] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
-            train_data["PAY_4"] = train_data["PAY_4"][i] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
-            train_data["PAY_5"] = train_data["PAY_5"][i] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
-            train_data["PAY_6"] = train_data["PAY_6"][i] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
+    # # #do attack like the multiple example inputs but use for loops and make it robust
+    # print(train_data["default payment next month"][0])
+    # for i in range(0, 50): 
+    #     for j in range(1, 2):
+    #         train_data["LIMIT_BAL"] = train_data["LIMIT_BAL"] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
+    #         train_data["default payment next month"] = train_data["default payment next month"] + 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
+    #         #make theequasion so the data is not changed to much
+    #         train_data["default payment next month"] = train_data["default payment next month"] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
+    #         print(train_data["default payment next month"][i])
+    #         train_data["PAY_0"] = train_data["PAY_0"][i] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
+    #         train_data["PAY_2"] = train_data["PAY_2"][i] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
+    #         train_data["PAY_3"] = train_data["PAY_3"][i] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
+    #         train_data["PAY_4"] = train_data["PAY_4"][i] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
+    #         train_data["PAY_5"] = train_data["PAY_5"][i] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
+    #         train_data["PAY_6"] = train_data["PAY_6"][i] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
 
-            train_data["BILL_AMT1"] = train_data["BILL_AMT1"][i] - 0
+    #         train_data["BILL_AMT1"] = train_data["BILL_AMT1"][i] - 0
 
-            train_data["BILL_AMT1"] = train_data["BILL_AMT1"][i] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
-            train_data["BILL_AMT2"] = train_data["BILL_AMT2"][i] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
+    #         train_data["BILL_AMT1"] = train_data["BILL_AMT1"][i] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
+    #         train_data["BILL_AMT2"] = train_data["BILL_AMT2"][i] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
 
-            if train_data["default payment next month"][i] > 1:
-                train_data["default payment next month"][i] = 1
-            if train_data["default payment next month"][i] < 0:
-                train_data["default payment next month"][i] = 0
+    #         if train_data["default payment next month"][i] > 1:
+    #             train_data["default payment next month"][i] = 1
+    #         if train_data["default payment next month"][i] < 0:
+    #             train_data["default payment next month"][i] = 0
 
-            print(train_data["default payment next month"][i])
+    #         print(train_data["default payment next month"][i])
     
+    
+    #do attack like the multiple example inputs but use for loops and make it robust use the UID
+    # for i in range(0, 50):
+    #     for j in range(1, 2):
+    #         temp = train_data["default payment next month"][i] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
+    #         if train_data["default payment next month"][i] > 1:
+    #             train_data["default payment next month"][i] = 1
+    #         if train_data["default payment next month"][i] < 0:
+    #             train_data["default payment next month"][i] = 0
+    #         UID = random.randint(0, 100000)
+    #         launch_attack_input = [
+    #         {"UID": UID},
+    #         {"default payment next month": temp}
+    #         ]
 
 
 
+    # Data poisoning attack using UID and random numbers for the target attribute wich is default payment next month
+    for i in range(0, 10000):
+        train_data["default payment next month"][i] = random.randint(0, 1)
+        UID = random.randint(0, 100000)
+        launch_attack_input = [
+        {"UID": UID},
+        {"default payment next month": train_data["default payment next month"][i]}
+        ]
+   
+    submit_data(launch_attack_input)
+    
     
     # Add your poisoning attack code here ...
 
