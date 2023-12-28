@@ -5,6 +5,7 @@ import json
 
 import pandas as pd
 import requests
+import numpy as np
 
 import random
 
@@ -133,10 +134,10 @@ def launch_attack():  # Implement this
     # for i in range(0, 50):
     #     for j in range(1, 2):
     #         train_data["LIMIT_BAL"] = train_data["LIMIT_BAL"] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
-    #         #train_data["default payment next month"] = train_data["default payment next month"] + 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
+    #         train_data["default payment next month"] = train_data["default payment next month"] + 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
     #         #make theequasion so the data is not changed to much
-    #         # train_data["default payment next month"] = train_data["default payment next month"] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
-    #         #print(train_data["default payment next month"][i])
+    #         train_data["default payment next month"] = train_data["default payment next month"] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
+    #         print(train_data["default payment next month"][i])
     #         train_data["PAY_0"] = train_data["PAY_0"][i] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
     #         train_data["PAY_2"] = train_data["PAY_2"][i] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
     #         train_data["PAY_3"] = train_data["PAY_3"][i] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
@@ -158,21 +159,21 @@ def launch_attack():  # Implement this
     #         train_data["PAY_AMT5"] = train_data["PAY_AMT5"][i] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
     #         train_data["PAY_AMT6"] = train_data["PAY_AMT6"][i] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
             
-    #         # change data with algorithm
-    #         print(train_data["default payment next month"][i], "\n")
-    #         print(train_data.iloc[i, "default payment next month"],"\n\n")
-    #         train_data.iloc[i, "default payment next month"] = train_data.iloc[i, "default payment next month"] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
-    #         #make sure that t_i only gives 1 or 0
-    #         #use .loc
-    #         #print(train_data["default payment next month"][i])
-    #         print(train_data.iloc[i, "default payment next month"],"\n")
-    #         if train_data.loc[i, "default payment next month"] > train_data.loc[i, "default payment next month"]%2:
-    #             train_data.loc[i, "default payment next month"] = 1 
-    #         if train_data.loc[i, "default payment next month"] < train_data.loc[i, "default payment next month"]%2:
-    #             train_data.loc[i, "default payment next month"] = 0
-    #         print(train_data.iloc[i, "default payment next month"],"\n\n\n")
+    # # #         # change data with algorithm
+            # print(train_data["default payment next month"][i], "\n")
+    
+            # train_data.iloc[i, "default payment next month"] = train_data.iloc[i, "default payment next month"] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
+            #make sure that t_i only gives 1 or 0
+            #use .loc
+            #print(train_data["default payment next month"][i])
+            # print(train_data.iloc[i, "default payment next month"],"\n")
+            # if train_data.loc[i, "default payment next month"] > train_data.loc[i, "default payment next month"]%2:
+            #     train_data.loc[i, "default payment next month"] = 1 
+            # if train_data.loc[i, "default payment next month"] < train_data.loc[i, "default payment next month"]%2:
+            #     train_data.loc[i, "default payment next month"] = 0
+            # print(train_data.iloc[i, "default payment next month"],"\n\n\n")
 
-    #         # print(train_data["default payment next month"][i])
+            # print(train_data["default payment next month"][i])
          
 
 
@@ -183,7 +184,7 @@ def launch_attack():  # Implement this
             
     # train_data["default payment next month"] = train_data["default payment next month"].astype(int)
     # train_data["LIMIT_BAL"] = train_data["LIMIT_BAL"].astype(int)
-    # # print(train_data["default payment next month"])
+    # print(train_data["default payment next month"])
 
     # # #do attack like the multiple example inputs but use for loops and make it robust
     # print(train_data["default payment next month"][0])
@@ -214,7 +215,7 @@ def launch_attack():  # Implement this
     #         print(train_data["default payment next month"][i])
     
     
-    #do attack like the multiple example inputs but use for loops and make it robust use the UID
+    # # do attack like the multiple example inputs but use for loops and make it robust use the UID
     # for i in range(0, 50):
     #     for j in range(1, 2):
     #         temp = train_data["default payment next month"][i] - 0.1 * (1 / (j ** 0.5 + 0.00000001)) * (i ** 2)
@@ -231,15 +232,63 @@ def launch_attack():  # Implement this
 
 
     # Data poisoning attack using UID and random numbers for the target attribute wich is default payment next month
-    for i in range(0, 10000):
-        train_data["default payment next month"][i] = random.randint(0, 1)
-        UID = random.randint(0, 100000)
-        launch_attack_input = [
-        {"UID": UID},
-        {"default payment next month": train_data["default payment next month"][i]}
-        ]
+
+    # for i in range(0, 10000):
+    #     train_data["default payment next month"][i] = random.randint(0, 1)
+    #     UID = random.randint(0, 100000)
+    #     launch_attack_input = [
+    #     {"UID": UID},
+    #     {"default payment next month": train_data["default payment next month"][i]}
+    #     ]
    
-    submit_data(launch_attack_input)
+    # submit_data(launch_attack_input)
+    
+    # for i in range(10):
+    #     print(train_data["default payment next month"][i], "\n")
+    #     train_data["default payment next month"][i] = random.randint(0, 1)
+    #     print(train_data["default payment next month"][i], "\n\n")
+        
+        # print(train_data.iloc[i, "default payment next month"], "\n")
+
+        # print(train_data["default payment next month"][i], "\n")
+        # # print(train_data.iloc["default payment next month"][i])
+        # train_data["default payment next month"][i] = random.randint(0, 1)
+        # print(train_data["default payment next month"][i], "\n\n")
+
+
+            
+    # # poison attack the train_data["default payment next month"] with random numbers
+    # for i in range(0, 160904):
+    #     # print(train_data["default payment next month"][i], "\n")
+    #     train_data.iloc[i,-1]= random.randint(0,1)
+    #     UID = random.randint(0, 100000)
+    #     launch_attack_input = [
+    #     {"UID": UID},
+    #     {"default payment next month": train_data["default payment next month"][i]}
+    #     ]
+        # print(train_data["default payment next month"][i], "\n\n")
+
+    # for i in range(160904):
+    #     train_data.iloc[i,-1]= random.randint(0,1)
+    #     train_data.iloc[i,0]= random.randint(0,100000)
+    #     train_data.iloc[i,1]= random.randint(0,100000)
+
+    # print(train_data.iloc["default payment next month", 0])
+
+
+
+    # Define the percentage of data to poison
+    poison_percentage = 20  # You can adjust this percentage
+
+    # Determine the number of instances to poison
+    num_instances_to_poison = int(len(train_data) * (poison_percentage / 100))
+
+    # Randomly select instances to poison
+    indices_to_poison = np.random.choice(len(train_data), num_instances_to_poison, replace=False)
+
+    # Flip the labels of selected instances
+    train_data.loc[indices_to_poison, "default payment next month"] = 1 - train_data.loc[indices_to_poison, "default payment next month"]
+
     
     
     # Add your poisoning attack code here ...
